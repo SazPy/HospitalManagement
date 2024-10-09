@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'main_fns_app',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +122,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'main_fns_app.User'
+# Redirect to custom login URL
+LOGIN_URL = 'login'  # This is the name you assigned to your login path
+LOGIN_REDIRECT_URL = 'dashboard'  # After login, redirect to the dashboard
+LOGOUT_REDIRECT_URL = 'login'  # After logout, redirect to login
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

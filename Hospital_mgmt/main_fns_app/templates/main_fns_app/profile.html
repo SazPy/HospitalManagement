@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+</head>
+<body>
+    <h2>User Profile</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <label for="{{ form.address.id_for_label }}">Address:</label>
+        {{ form.address }}
+
+        <label for="{{ form.phone_number.id_for_label }}">Phone Number:</label>
+        {{ form.phone_number }}
+
+        <p>Currently: {{ user.userprofile.profile_image.url if user.userprofile.profile_image else "No image uploaded" }}</p>
+
+        <label for="{{ form.profile_image.id_for_label }}">Upload New Profile Image:</label>
+        {{ form.profile_image }}
+
+        <label for="{{ form.profile_image.clear }}">
+
+            {{ form.profile_image.clear }} Clear Profile Image
+        </label>
+
+        <button type="submit">Update Profile</button>
+    </form>
+
+    {% if user.userprofile.profile_image %}
+        <h3>Current Profile Image:</h3>
+        <img src="{{ user.userprofile.profile_image.url }}" alt="Profile Image" style="max-width: 200px; max-height: 200px;">
+    {% else %}
+        <p>No profile image set.</p>
+    {% endif %}
+</body>
+</html>
